@@ -1,0 +1,28 @@
+$turquoise : #52B0C9;
+$darkturqoise: #266A7C;
+$lightgrey : #CCC;
+$darkgrey : #AAA;
+$white : #EEE;
+$bg: #1c1c1c;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  font-size: 14px;
+  background: $bg;
+  color: $white;
+  h1 {
+    font-size: 4rem;
+  }
+  h2 {
+    font-size: 3rem;
+  }
+  h3 {
+    font-size: 2rem;
+  }
+}
