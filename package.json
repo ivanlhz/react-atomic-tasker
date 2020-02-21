@@ -8,6 +8,8 @@
   },
   "license": "MIT",
   "scripts": {
+    "test": "jest",
+    "test:coverage": "jest --coverage",
     "start": "webpack-dev-server --hot --open --env development",
     "build": "webpack --mode production --progress"
   },
