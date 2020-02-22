@@ -30,3 +30,10 @@ test('Should add new task after press enter' , () => {
   fireEvent.keyDown(input, {key: 'Enter', keyCode: 13})
   expect(mockFunction.mock.calls.length).toBe(1)
 })
+
+test('Should clear the input field after focus' , () => {
+  const {getByPlaceholderText} = render(<EditTask />)
+  const input = getByPlaceholderText('type task description')
+  input.focus()
+  expect(input.value).toBe('')
+})
