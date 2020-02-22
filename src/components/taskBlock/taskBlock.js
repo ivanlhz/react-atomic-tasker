@@ -5,7 +5,7 @@ import {MdDelete} from 'react-icons/md'
 import {EditTask} from '../editTask'
 import './taskBlock.scss'
 
-const TaskBlock = ({task, onRemove, onUpdate}) => {
+const TaskBlock = ({task, onRemove, onChange, id}) => {
   const [_task, setTask] = useState(task)
   const [editable, setEditabe] = useState(false)
 
@@ -16,7 +16,7 @@ const TaskBlock = ({task, onRemove, onUpdate}) => {
   const addTaskHandle = (data) => {
     setTask(data)
     setEditabe(false)
-    onUpdate(data)
+    onChange(id, data)
   }
 
   const doneHandle = () => {
@@ -38,7 +38,7 @@ const TaskBlock = ({task, onRemove, onUpdate}) => {
               {_task.value}
             </p> 
             <button data-testid="btn-edit" onClick={editHandler}><FiEdit /></button>
-            <button data-testid="btn-remove" onClick={onRemove(_task)}><MdDelete /></button>
+            <button data-testid="btn-remove" onClick={onRemove}><MdDelete /></button>
           </>
       }
     </div>
@@ -46,9 +46,10 @@ const TaskBlock = ({task, onRemove, onUpdate}) => {
 }
 
 TaskBlock.propTypes = {
+  id: PropTypes.number.isRequired,
   task: PropTypes.object.isRequired, 
   onRemove: PropTypes.func.isRequired, 
-  onUpdate: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired
 }
 
 export default TaskBlock
