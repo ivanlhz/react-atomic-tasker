@@ -2,8 +2,13 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types';
 import './editTask.scss'
 
-const EditTask = (props) => {
-  const [task, setTask] = useState('')
+const defaultTask = {
+  value: '',
+  done: false
+}
+
+const EditTask = ({task, onAddTask}) => {
+  const [_task, setTask] = useState(task ? task : defaultTask)
 
   const taskKeyDownHandler = (event) => {
     if(event.key === 'Enter') {
@@ -11,27 +16,35 @@ const EditTask = (props) => {
     }
   }
 
-  const changeTaskHandler = (event) => {
-    setTask(event.target.value)
+  const addTaskHandler = () => {
+    addTask(_task.value)
   }
 
-  const addTaskHandler = () => {
-    addTask(task)
+  const handleChange = (event) => {
+    setTask({value: event.target.value, done:false})
+  }
+
+  const clearInput = () => {
+    setTask(defaultTask)
   }
 
   const addTask = (value) => {
     const newTask = {
-      value,
+      value: value,
       done: false
     };
-    props.onAddTask(newTask)
-    setTask('')
+    onAddTask(newTask)
+    clearInput()
+  }
+
+  const onFocusHandler = (event) => {
+    clearInput();
   }
 
   return (
     <div className="edit-task">
       <label htmlFor="edit task">
-        <input type="text" name="taskDescription" onChange={changeTaskHandler} onKeyDown={taskKeyDownHandler} placeholder="type task description" value={task}/>
+        <input type="text" name="taskDescription" onChange={handleChange} onKeyDown={taskKeyDownHandler} onFocus={onFocusHandler} placeholder="type task description" value={_task.value}/>
       </label>
       <button onClick={addTaskHandler}>Add</button>
     </div>
@@ -39,6 +52,7 @@ const EditTask = (props) => {
 }
 
 EditTask.propTypes = {
+  task: PropTypes.object,
   onAddTask: PropTypes.func
 }
 
