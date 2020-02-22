@@ -1,3 +1,5 @@
 // Here we export each component that we have
-export {default as Tasker} from './tasker/tasker'
-export {default as EditTask} from './editTask/editTask'
+export * from './tasker'
+export * from './editTask'
+export * from './taskList'
+export * from './taskBlock'
