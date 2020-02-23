@@ -5,5 +5,6 @@ module.exports = {
   },
   collectCoverageFrom: [
     "src/**/{!(index),}.js"
-  ]
+  ],
+  setupFilesAfterEnv: ['./jest.setup.js'],
 }

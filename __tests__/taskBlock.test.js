@@ -3,17 +3,16 @@ import {TaskBlock} from '../src/components'
 import {render, fireEvent} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
-test('Should be render ', () => {
+it('Should be render ', () => {
   const task = {
     value: 'Buy cofee',
     done: false
   }
   const {getByText} = render(<TaskBlock id={1} task={task} onChange={() => {}} onRemove={()=>{}}/>)
-  const element = getByText(task.value)
-  expect(element).toBeTruthy()
+  expect(getByText(task.value)).toBeInTheDocument()
 })
 
-test('Should add class "task-done" when the task is done', () => {
+it('Should add class "task-done" when the task is done', () => {
   const task = {
     value: 'Buy cofee',
     done: false
@@ -25,7 +24,7 @@ test('Should add class "task-done" when the task is done', () => {
   expect(element.className).toBe('task-done')
 } )
 
-test('Should call onRemove function ', () => {
+it('Should call onRemove function ', () => {
   const task = {
     value: 'Buy cofee',
     done: false
@@ -38,7 +37,7 @@ test('Should call onRemove function ', () => {
   expect(mockFunction.mock.calls.length).toBe(1)
 })
 
-test('Should call onUpdate function ', () => {
+it('Should call onUpdate function ', () => {
   const task = {
     value: 'Buy cofee',
     done: false
@@ -57,5 +56,5 @@ test('Should call onUpdate function ', () => {
   const element = getByText('New Task')
 
   expect(mockFunction.mock.calls.length).toBe(1)
-  expect(element).toBeTruthy()
+  expect(element).toBeInTheDocument()
 })

@@ -5,11 +5,9 @@ import {EditTask} from '../src/components'
 
 test('Should be render', () => {
   const {getByPlaceholderText, getByText} = render(<EditTask />)
-  const input = getByPlaceholderText('type task description')
-  const btn = getByText('Add')
 
-  expect(input).toBeTruthy()
-  expect(btn).toBeTruthy() 
+  expect(getByPlaceholderText('type task description')).toBeInTheDocument()
+  expect(getByText('Add')).toBeInTheDocument() 
 })
 
 test('Should add new task after press add button' , () => {
