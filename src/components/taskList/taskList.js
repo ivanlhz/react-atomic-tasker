@@ -1,54 +1,41 @@
-import React, {Component } from 'react'
+import React, {Component, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import {TaskBlock} from '../'
 import './taskList.scss'
 
+const TaskList = ({list, onUpdate}) => {
+  const [dataList, setDataList] = useState(list ? list : [])
 
-class TaskList extends Component {
-  state = {
-    dataList: this.props.list ? this.props.list : []
+  useEffect(() => {
+    setDataList(list)
+  })
+
+  const removeHandler = (id) => {
+    const _list = dataList.filter(task => task.id !== id)
+    onUpdate(_list)
   }
 
-  static getDerivedStateFromProps(props, state) {
-    if (JSON.stringify(props.list) !== JSON.stringify(state.dataList)) {
-      return {
-        dataList: props.list
-      };
-    }
-    return null;
-  }
-
-  removeHandler = (id) => {
-    const _list = this.state.dataList.filter(task => task.id !== id)
-    this.setState({dataList: _list})
-    this.props.onUpdate(_list)
-  }
-
-  updateHandler = (task) => {
-    let newList = [...this.state.dataList]
+  const updateHandler = (task) => {
+    let newList = [...dataList]
     newList = newList.map( t => {
       if (t.id === task.id) {
         t = task;
       }
       return t
     })
-    this.setState({dataList:newList})
-    this.props.onUpdate(newList)
+    onUpdate(newList)
   }
 
-  render () {
-    const {dataList} = this.state
-    return(
-      <div data-testid="task-list" className="task-list">
-      {
-        dataList && dataList.length > 0 ? 
-        dataList.map( task => <TaskBlock key={task.id} task={task} onRemove={() => this.removeHandler(task.id)} onUpdateTask={this.updateHandler}/>)
-        :
-          <p className="no-data">Please add new task</p>
-      }
-      </div>
-    )
-  }
+  return(
+    <div data-testid="task-list" className="task-list">
+    {
+      dataList && dataList.length > 0 ? 
+      dataList.map( task => <TaskBlock key={task.id} task={task} onRemove={() => removeHandler(task.id)} onUpdateTask={updateHandler}/>)
+      :
+        <p className="no-data">Please add new task</p>
+    }
+    </div>
+  )
 }
 
 TaskList.propTypes = {
