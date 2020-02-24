@@ -8,7 +8,7 @@ it('Should be render ', () => {
     value: 'Buy cofee',
     done: false
   }
-  const {getByText} = render(<TaskBlock id={1} task={task} onChange={() => {}} onRemove={()=>{}}/>)
+  const {getByText} = render(<TaskBlock id={1} task={task} onUpdateTask={() => {}} onRemove={()=>{}}/>)
   expect(getByText(task.value)).toBeInTheDocument()
 })
 
@@ -17,7 +17,7 @@ it('Should add class "task-done" when the task is done', () => {
     value: 'Buy cofee',
     done: false
   }
-  const {getByText} = render(<TaskBlock id={1} task={task} onChange={() => {}} onRemove={()=>{}}/>)
+  const {getByText} = render(<TaskBlock id={1} task={task} onUpdateTask={() => {}} onRemove={()=>{}}/>)
   const element = getByText(task.value)
   userEvent.click(element)
 
@@ -31,7 +31,7 @@ it('Should call onRemove function ', () => {
   }
 
   const mockFunction = jest.fn()
-  const {getByTestId} = render(<TaskBlock id={1} task={task} onChange={() => {}} onRemove={mockFunction}/>)
+  const {getByTestId} = render(<TaskBlock id={1} task={task} onUpdateTask={() => {}} onRemove={mockFunction}/>)
   const btnRemove = getByTestId('btn-remove')
   userEvent.click(btnRemove)
   expect(mockFunction.mock.calls.length).toBe(1)
@@ -44,7 +44,7 @@ it('Should call onUpdate function ', () => {
   }
 
   const mockFunction = jest.fn()
-  const {getByTestId, getByPlaceholderText, getByText} = render(<TaskBlock id={1} task={task} onChange={mockFunction} onRemove={()=>{}}/>)
+  const {getByTestId, getByPlaceholderText, getByText} = render(<TaskBlock id={1} task={task} onUpdateTask={mockFunction} onRemove={()=>{}}/>)
   const btnEdit = getByTestId('btn-edit')
   userEvent.click(btnEdit)
 
