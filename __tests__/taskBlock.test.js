@@ -49,7 +49,7 @@ it('Should call onUpdate function ', () => {
   userEvent.click(btnEdit)
 
   const input = getByPlaceholderText('type task description')
-  const btn = getByText('Add')
+  const btn = getByText('Update')
   fireEvent.change(input, { target: { value: 'New Task' } })
   userEvent.click(btn)
 

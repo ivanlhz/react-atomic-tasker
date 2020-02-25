@@ -35,3 +35,15 @@ test('Should clear the input field after focus' , () => {
   input.focus()
   expect(input.value).toBe('')
 })
+
+test('Shouldn\'t clear the input field after focus' , () => {
+  const task = {
+    id:1,
+    value: 'Test',
+    done: false
+  }
+  const {getByPlaceholderText} = render(<EditTask task={task} isEdit={true} />)
+  const input = getByPlaceholderText('type task description')
+  input.focus()
+  expect(input.value).not.toBe('')
+})

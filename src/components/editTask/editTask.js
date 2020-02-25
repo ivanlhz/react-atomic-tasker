@@ -7,7 +7,7 @@ const defaultTask = {
   done: false
 }
 
-const EditTask = ({task, onAddTask}) => {
+const EditTask = ({task, onAddTask, isEdit}) => {
   const [_task, setTask] = useState(task ? task : defaultTask)
 
   const taskKeyDownHandler = (event) => {
@@ -37,8 +37,8 @@ const EditTask = ({task, onAddTask}) => {
     clearInput()
   }
 
-  const onFocusHandler = (event) => {
-    clearInput();
+  const onFocusHandler = () => {
+    if(!isEdit) clearInput();
   }
 
   return (
@@ -46,14 +46,15 @@ const EditTask = ({task, onAddTask}) => {
       <label htmlFor="edit task">
         <input type="text" name="taskDescription" onChange={handleChange} onKeyDown={taskKeyDownHandler} onFocus={onFocusHandler} placeholder="type task description" value={_task.value}/>
       </label>
-      <button onClick={addTaskHandler}>Add</button>
+      <button onClick={addTaskHandler}>{ isEdit ? 'Update' : 'Add' }</button>
     </div>
   )
 }
 
 EditTask.propTypes = {
   task: PropTypes.object,
-  onAddTask: PropTypes.func
+  onAddTask: PropTypes.func,
+  isEdit: PropTypes.bool
 }
 
 export default EditTask
