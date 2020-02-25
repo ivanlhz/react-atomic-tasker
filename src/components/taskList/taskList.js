@@ -30,7 +30,7 @@ const TaskList = ({list, onUpdate}) => {
     <div data-testid="task-list" className="task-list">
     {
       dataList && dataList.length > 0 ? 
-      dataList.map( task => <TaskBlock key={task.id} task={task} onRemove={() => removeHandler(task.id)} onUpdateTask={updateHandler}/>)
+      dataList.map( task => <TaskBlock key={task.id} task={task} onRemove={() => removeHandler(task.id)} onUpdateTask={updateHandler} />)
       :
         <p className="no-data">Please add new task</p>
     }
