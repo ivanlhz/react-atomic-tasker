@@ -7,7 +7,6 @@ export default () => {
   const [taskList, setTaskList] = useState([])
 
   const addTaskHandler = (task) => {
-    task.id = taskList.length + 1
     setTaskList([...taskList, task])
   }
 
@@ -18,7 +17,7 @@ export default () => {
   return (
     <> 
       <h1>Hello tasker!!</h1>
-      <EditTask onAddTask={addTaskHandler}/>
+      <EditTask id={taskList.length + 1} onAddTask={addTaskHandler}/>
       <TaskList list={taskList} onUpdate={updateListHandler}/>
     </>)
 }

@@ -7,7 +7,7 @@ const defaultTask = {
   done: false
 }
 
-const EditTask = ({task, onAddTask, isEdit}) => {
+const EditTask = ({task, onAddTask, isEdit, id}) => {
   const [_task, setTask] = useState(task ? task : defaultTask)
 
   const taskKeyDownHandler = (event) => {
@@ -30,6 +30,7 @@ const EditTask = ({task, onAddTask, isEdit}) => {
 
   const addTask = (value) => {
     const newTask = {
+      id,
       value: value,
       done: false
     };
@@ -52,6 +53,7 @@ const EditTask = ({task, onAddTask, isEdit}) => {
 }
 
 EditTask.propTypes = {
+  id: PropTypes.number,
   task: PropTypes.object,
   onAddTask: PropTypes.func,
   isEdit: PropTypes.bool

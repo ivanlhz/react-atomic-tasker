@@ -31,7 +31,7 @@ const TaskBlock = ({task, onRemove, onUpdateTask}) => {
       {
         editable 
         ?
-          <EditTask task={_task} onAddTask={addTaskHandle} isEdit={true}/>
+          <EditTask id={_task.id} task={_task} onAddTask={addTaskHandle} isEdit={true}/>
         : 
           <>
             <p className={_task.done ? 'task-done' : ''} onClick={doneHandle}>
