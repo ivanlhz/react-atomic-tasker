@@ -1,5 +1,5 @@
 import React from 'react'
-import {render, fireEvent} from '@testing-library/react'
+import {render} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import {TaskList} from '../src/components/'
 
@@ -47,13 +47,15 @@ test('Should update the second element', () => {
     testList = [...list]
   }
 
-  const {getByText, getAllByTestId, getByDisplayValue, rerender, debug} = render(<TaskList list={testList} onUpdate={updateHandler} />)
+  const {getByText, getAllByTestId, getByDisplayValue} = render(<TaskList list={testList} onUpdate={updateHandler} />)
   const allEditButtons = getAllByTestId('btn-edit')
   userEvent.click(allEditButtons[1])
+
   const input = getByDisplayValue(testList[1].value)
   const updateBtn = getByText('Update')
   expect(input).toBeInTheDocument()
   expect(updateBtn).toBeInTheDocument()
+
   userEvent.type(input, '345')
   userEvent.click(updateBtn)
   expect(getByText('Task 2345')).toBeInTheDocument()
