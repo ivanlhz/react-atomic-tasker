@@ -17,7 +17,7 @@ test('Should add new task after press add button' , () => {
   const btn = getByText('Add')
   userEvent.type(input,'New Task')
   userEvent.click(btn)
-  expect(mockFunction.mock.calls.length).toBe(1)
+  expect(mockFunction).toHaveBeenCalledTimes(1)
 })
 
 test('Should add new task after press enter' , () => {
@@ -26,7 +26,7 @@ test('Should add new task after press enter' , () => {
   const input = getByPlaceholderText('type task description')
   userEvent.type(input,'New Task')
   fireEvent.keyDown(input, {key: 'Enter', keyCode: 13})
-  expect(mockFunction.mock.calls.length).toBe(1)
+  expect(mockFunction).toHaveBeenCalledTimes(1)
 })
 
 test('Should clear the input field after focus' , () => {

@@ -20,7 +20,6 @@ it('Should add class "task-done" when the task is done', () => {
   const {getByText} = render(<TaskBlock id={1} task={task} onUpdateTask={() => {}} onRemove={()=>{}}/>)
   const element = getByText(task.value)
   userEvent.click(element)
-
   expect(element.className).toBe('task-done')
 } )
 
@@ -34,7 +33,7 @@ it('Should call onRemove function ', () => {
   const {getByTestId} = render(<TaskBlock id={1} task={task} onUpdateTask={() => {}} onRemove={mockFunction}/>)
   const btnRemove = getByTestId('btn-remove')
   userEvent.click(btnRemove)
-  expect(mockFunction.mock.calls.length).toBe(1)
+  expect(mockFunction).toHaveBeenCalledTimes(1)
 })
 
 it('Should call onUpdate function ', () => {
@@ -55,6 +54,6 @@ it('Should call onUpdate function ', () => {
 
   const element = getByText('New Task')
 
-  expect(mockFunction.mock.calls.length).toBe(1)
+  expect(mockFunction).toHaveBeenCalledTimes(1)
   expect(element).toBeInTheDocument()
 })
