@@ -1,7 +1,6 @@
 import React, {useState } from 'react'
-import './tasker.scss' 
-import { EditTask } from '../editTask'
-import { TaskList } from '../taskList'
+import styles from './tasker.module.scss' 
+import { EditTask, TaskList, Footer } from '../'
 
 export default () => {
   const [taskList, setTaskList] = useState([])
@@ -15,9 +14,12 @@ export default () => {
   }
 
   return (
-    <> 
-      <h1>Hello tasker!!</h1>
-      <EditTask id={taskList.length + 1} onAddTask={addTaskHandler}/>
-      <TaskList list={taskList} onUpdate={updateListHandler}/>
-    </>)
+    <div className={styles.main}> 
+      <h1>Tasker</h1>
+      <div className={styles.wrapper}>
+        <EditTask id={taskList.length + 1} onAddTask={addTaskHandler}/>
+        <TaskList list={taskList} onUpdate={updateListHandler}/>
+      </div>
+      <Footer />
+    </div>)
 }

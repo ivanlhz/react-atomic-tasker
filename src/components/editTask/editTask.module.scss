@@ -1,0 +1,27 @@
+@mixin fontSize {
+  font-size: 1.5rem;
+}
+$radius: 3px;
+
+.editTask {
+  padding: 16px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  input {
+    @include fontSize;
+    padding: 16px;
+    width: 100%;
+    border-radius: $radius;
+    border-right: 0;
+    color: #ccc;
+    border: 1px solid #ccc;
+    background-color: #011c36;
+  }
+  button {
+    padding: 16px;
+    @include fontSize;
+    border-top-right-radius: $radius;
+    border-bottom-right-radius: $radius;
+  }
+}

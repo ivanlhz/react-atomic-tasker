@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types';
-import './editTask.scss'
+import styles from './editTask.module.scss'
 
 const defaultTask = {
   value: '',
@@ -43,7 +43,7 @@ const EditTask = ({task, onAddTask, isEdit, id}) => {
   }
 
   return (
-    <div className="edit-task">
+    <div className={styles.editTask}>
       <label htmlFor="edit task">
         <input type="text" name="taskDescription" onChange={handleChange} onKeyDown={taskKeyDownHandler} onFocus={onFocusHandler} placeholder="type task description" value={_task.value}/>
       </label>

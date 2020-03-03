@@ -3,3 +3,5 @@ export * from './tasker'
 export * from './editTask'
 export * from './taskList'
 export * from './taskBlock'
+export * from './footer'
+

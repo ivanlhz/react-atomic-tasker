@@ -1,0 +1,21 @@
+@mixin flexColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  @include flexColumn;
+  align-items: center;
+  padding-top: 16px;
+  height: 100vh;
+  h1 {
+    margin-bottom: 4rem;
+  }
+}
+
+.wrapper {
+  @include flexColumn;
+  flex-grow: 1;
+  width: 80%;
+ 
+}
