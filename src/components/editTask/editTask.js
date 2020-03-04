@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types';
 import styles from './editTask.module.scss'
+import {FaEdit} from 'react-icons'
 
 const defaultTask = {
   value: '',
@@ -14,10 +15,6 @@ const EditTask = ({task, onAddTask, isEdit, id}) => {
     if(event.key === 'Enter') {
       addTask(event.target.value)
     }
-  }
-
-  const addTaskHandler = () => {
-    addTask(_task.value)
   }
 
   const handleChange = (event) => {
@@ -42,12 +39,19 @@ const EditTask = ({task, onAddTask, isEdit, id}) => {
     if(!isEdit) clearInput();
   }
 
+  const getPlayholderText = () => {
+    if (isEdit) {
+      return 'press enter to update task'
+    }
+    return 'press enter to add new task'
+  }
+
   return (
     <div className={styles.editTask}>
       <label htmlFor="edit task">
-        <input type="text" name="taskDescription" onChange={handleChange} onKeyDown={taskKeyDownHandler} onFocus={onFocusHandler} placeholder="type task description" value={_task.value}/>
+        <input type="text" name="taskDescription" onChange={handleChange} onKeyDown={taskKeyDownHandler} onFocus={onFocusHandler} placeholder={getPlayholderText()} value={_task.value}/>
       </label>
-      <button onClick={addTaskHandler}>{ isEdit ? 'Update' : 'Add' }</button>
+      <span>{ isEdit ? 'Update' : '+' }</span>
     </div>
   )
 }

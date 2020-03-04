@@ -1,5 +1,5 @@
 import React from 'react'
-import {render} from '@testing-library/react'
+import {render, fireEvent} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import {TaskList} from '../src/components/'
 
@@ -52,11 +52,10 @@ test('Should update the second element', () => {
   userEvent.click(allEditButtons[1])
 
   const input = getByDisplayValue(testList[1].value)
-  const updateBtn = getByText('Update')
   expect(input).toBeInTheDocument()
-  expect(updateBtn).toBeInTheDocument()
+  expect(getByText('Update')).toBeInTheDocument()
 
   userEvent.type(input, '345')
-  userEvent.click(updateBtn)
+  fireEvent.keyDown(input, {key: 'Enter', keyCode: 13})
   expect(getByText('Task 2345')).toBeInTheDocument()
 })

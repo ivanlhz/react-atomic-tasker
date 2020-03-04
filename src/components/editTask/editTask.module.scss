@@ -4,24 +4,32 @@
 $radius: 3px;
 
 .editTask {
-  padding: 16px;
   width: 100%;
   display: grid;
   grid-template-columns: 1fr auto;
+  border: 1px solid;
+  border-radius: $radius;
+  align-items: center;
+
+  border-color: #ccc;
+  color: #ccc;
+  background-color: #011c36;
   input {
     @include fontSize;
     padding: 16px;
     width: 100%;
-    border-radius: $radius;
-    border-right: 0;
-    color: #ccc;
-    border: 1px solid #ccc;
-    background-color: #011c36;
+    border: none;
+    background-color: transparent;
+    caret-color: #ccc;
+    color: #00c8ff; 
+    &:focus {
+      outline: none;
+    }
   }
-  button {
+  span {
     padding: 16px;
     @include fontSize;
-    border-top-right-radius: $radius;
-    border-bottom-right-radius: $radius;
+    color: #00c8ff;
+    background-color: transparent;
   }
 }

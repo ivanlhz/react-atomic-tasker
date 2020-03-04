@@ -1,6 +1,6 @@
 import React from 'react'
 import {TaskBlock} from '../src/components'
-import {render} from '@testing-library/react'
+import {render, fireEvent} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
 it('Should be render ', () => {
@@ -47,9 +47,9 @@ it('Should call onUpdate function ', () => {
   const btnEdit = getByTestId('btn-edit')
   userEvent.click(btnEdit)
 
-  const input = getByPlaceholderText('type task description')
+  const input = getByPlaceholderText('press enter to update task')
   userEvent.type(input, 'New Task')
-  userEvent.click(getByText('Update'))
+  fireEvent.keyDown(input, {key: 'Enter', keyCode: 13})
 
   expect(mockFunction).toHaveBeenCalledTimes(1)
   expect(getByText(/New Task/i)).toBeInTheDocument()
