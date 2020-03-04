@@ -1,21 +1,26 @@
 import React, {useState } from 'react'
 import styles from './tasker.module.scss' 
-import { EditTask, TaskList, Footer } from '../'
+import { EditTask, TaskList, Footer, Header } from '../'
 
 export default () => {
   const [taskList, setTaskList] = useState([])
 
-  const addTaskHandler = (task) => {
+  const addTaskHandler = task => {
     setTaskList([...taskList, task])
   }
 
-  const updateListHandler = (list) => {
+  const updateListHandler = list => {
     setTaskList([...list])
   }
 
+  const getNavMenu = () => ([
+    {url:'/login', text: 'Login'},
+    {url:'', text: 'LogOut'}
+  ])
+
   return (
     <div className={styles.main}> 
-      <h1>Tasker</h1>
+    <Header text="Tasker" navMenu={getNavMenu()}/>
       <div className={styles.wrapper}>
         <EditTask id={taskList.length + 1} onAddTask={addTaskHandler}/>
         <TaskList list={taskList} onUpdate={updateListHandler}/>

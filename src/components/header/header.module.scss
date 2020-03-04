@@ -1,0 +1,36 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 16px;
+  
+  background-color: #011c36;
+  color:white;
+
+  h1 {
+    font-size: 2rem;
+    margin: 0;
+    padding: 0;
+    font-variant: small-caps;
+  }
+  nav {
+    display: flex;
+    justify-content: flex-start;
+    flex-grow: 1;
+    ul {
+      display: flex;
+      margin-left: auto;
+      align-items: center;
+      list-style: none;
+      li {
+        margin-left: 16px;
+        a {
+          text-decoration: none;
+          color:#00c8ff;
+        }
+      }
+    }
+  }
+}
