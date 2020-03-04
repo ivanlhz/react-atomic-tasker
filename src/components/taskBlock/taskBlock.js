@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import PropTypes from 'prop-types'
 import {FiEdit} from 'react-icons/fi'
 import {MdDelete} from 'react-icons/md'
@@ -13,7 +13,7 @@ const TaskBlock = ({task, onRemove, onUpdateTask}) => {
     setEditabe(true)
   }
 
-  const addTaskHandle = (data) => {
+  const addTaskHandle = data => {
     setTask(data)
     setEditabe(false)
     onUpdateTask(data)
@@ -22,33 +22,40 @@ const TaskBlock = ({task, onRemove, onUpdateTask}) => {
   const doneHandle = () => {
     setTask({
       ..._task,
-      done: !_task.done
+      done: !_task.done,
     })
   }
 
   return (
     <div className={'task-block'}>
-      {
-        editable 
-        ?
-          <EditTask id={_task.id} task={_task} onAddTask={addTaskHandle} isEdit={true}/>
-        : 
-          <>
-            <p className={_task.done ? 'task-done' : ''} onClick={doneHandle}>
-              {_task.value}
-            </p> 
-            <button data-testid="btn-edit" onClick={editHandler}><FiEdit /></button>
-            <button data-testid="btn-remove" onClick={onRemove}><MdDelete /></button>
-          </>
-      }
+      {editable ? (
+        <EditTask
+          id={_task.id}
+          task={_task}
+          onAddTask={addTaskHandle}
+          isEdit={true}
+        />
+      ) : (
+        <>
+          <p className={_task.done ? 'task-done' : ''} onClick={doneHandle}>
+            {_task.value}
+          </p>
+          <button data-testid='btn-edit' onClick={editHandler}>
+            <FiEdit />
+          </button>
+          <button data-testid='btn-remove' onClick={onRemove}>
+            <MdDelete />
+          </button>
+        </>
+      )}
     </div>
   )
 }
 
 TaskBlock.propTypes = {
-  task: PropTypes.object.isRequired, 
-  onRemove: PropTypes.func.isRequired, 
-  onUpdateTask: PropTypes.func.isRequired
+  task: PropTypes.object.isRequired,
+  onRemove: PropTypes.func.isRequired,
+  onUpdateTask: PropTypes.func.isRequired,
 }
 
 export default TaskBlock
