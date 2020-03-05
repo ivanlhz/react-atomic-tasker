@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {FiEdit} from 'react-icons/fi'
 import {MdDelete} from 'react-icons/md'
 import {EditTask} from '../editTask'
-import './taskBlock.scss'
+import styles from './taskBlock.module.scss'
 
 const TaskBlock = ({task, onRemove, onUpdateTask}) => {
   const [_task, setTask] = useState(task)
@@ -27,7 +27,7 @@ const TaskBlock = ({task, onRemove, onUpdateTask}) => {
   }
 
   return (
-    <div className={'task-block'}>
+    <div className={styles.taskBlock}>
       {editable ? (
         <EditTask
           id={_task.id}
@@ -40,10 +40,18 @@ const TaskBlock = ({task, onRemove, onUpdateTask}) => {
           <p className={_task.done ? 'task-done' : ''} onClick={doneHandle}>
             {_task.value}
           </p>
-          <button data-testid='btn-edit' onClick={editHandler}>
+          <button
+            className={styles.edit}
+            data-testid='btn-edit'
+            onClick={editHandler}
+          >
             <FiEdit />
           </button>
-          <button data-testid='btn-remove' onClick={onRemove}>
+          <button
+            className={styles.remove}
+            data-testid='btn-remove'
+            onClick={onRemove}
+          >
             <MdDelete />
           </button>
         </>

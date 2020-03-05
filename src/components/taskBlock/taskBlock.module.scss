@@ -1,0 +1,41 @@
+@mixin button {
+  font-size: 2rem;
+  color: #ccc;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  margin-left: 16px;
+  transition: all ease 400ms;
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+.taskBlock {
+  width: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  font-size: 1.2rem;
+
+  align-items: center;
+  padding: 16px;
+  margin-top: 16px;
+
+  color: #011c36;
+  background-color: white;
+}
+
+.remove {
+  @include button;
+  &:hover {
+    color: red;
+  }
+}
+
+.edit {
+  @include button;
+  &:hover {
+    color: #11cc11
+  }
+}
