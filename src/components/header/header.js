@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './header.module.scss'
+import PropTypes from 'prop-types'
 
 const Header = ({text, navMenu}) => {
   return (
@@ -9,15 +10,21 @@ const Header = ({text, navMenu}) => {
       </div>
       <nav>
         <ul>
-          {navMenu.map(element => (
-            <li key={element.text}>
-              <a href={element.url}>{element.text}</a>
-            </li>
-          ))}
+          {navMenu.length > 0 &&
+            navMenu.map(element => (
+              <li key={element.text}>
+                <a href={element.url}>{element.text}</a>
+              </li>
+            ))}
         </ul>
       </nav>
     </div>
   )
+}
+
+Header.propTypes = {
+  text: PropTypes.string.isRequired,
+  navMenu: PropTypes.array,
 }
 
 export default Header
