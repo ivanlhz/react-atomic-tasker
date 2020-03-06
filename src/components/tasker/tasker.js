@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import styles from './tasker.module.scss'
+import {withRouter} from 'react-router-dom'
 import {EditTask, TaskList, Footer, Header} from '../'
 
 const Tasker = () => {
@@ -30,4 +31,4 @@ const Tasker = () => {
   )
 }
 
-export default Tasker
+export default withRouter(Tasker)

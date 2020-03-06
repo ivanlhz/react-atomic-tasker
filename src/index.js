@@ -1,6 +1,6 @@
 import React from 'react'
 import {render} from 'react-dom'
-import {Tasker} from './components'
+import ApplicationRouter from './router'
 import './index.scss'
 
-render(<Tasker />, document.getElementById('app'))
+render(<ApplicationRouter />, document.getElementById('app'))
