@@ -11,4 +11,6 @@ const fireApp = firebase.initializeApp({
   appId: process.env.FIREBASE_APP,
 })
 
+// fireApp.analytics()
+
 export default fireApp
