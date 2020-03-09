@@ -1,14 +1,14 @@
 import React from 'react'
-import {BrowserRouter, Route} from 'react-router-dom'
-import {Login, Tasker} from './components'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
+import {Login, Tasker, PrivateRoute} from './components'
 import {AuthProvider} from './hooks/auth'
 
 const ApplicationRouter = () => (
   <AuthProvider>
-    <BrowserRouter>
+    <Router>
       <Route exact path='/' component={Login} />
-      <Route exact path='/tasker' component={Tasker} />
-    </BrowserRouter>
+      <PrivateRoute exact path='/tasker' component={Tasker} />
+    </Router>
   </AuthProvider>
 )
 
