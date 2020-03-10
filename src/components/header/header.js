@@ -13,7 +13,13 @@ const Header = ({text, navMenu}) => {
           {navMenu.length > 0 &&
             navMenu.map(element => (
               <li key={element.text}>
-                <a href={element.url}>{element.text}</a>
+                {element.action ? (
+                  <a href={element.url} onClick={element.action}>
+                    {element.text}
+                  </a>
+                ) : (
+                  <a href={element.url}>{element.text}</a>
+                )}
               </li>
             ))}
         </ul>

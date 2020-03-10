@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import styles from './tasker.module.scss'
 import {withRouter} from 'react-router-dom'
 import {EditTask, TaskList, Footer, Header} from '../'
+import fireApp from '../../api/firebase'
 
 const Tasker = () => {
   const [taskList, setTaskList] = useState([])
@@ -14,10 +15,12 @@ const Tasker = () => {
     setTaskList([...list])
   }
 
-  const getNavMenu = () => [
-    {url: '/login', text: 'Login'},
-    {url: '', text: 'LogOut'},
-  ]
+  const logoutHanlder = e => {
+    e.preventDefault()
+    fireApp.auth().signOut()
+  }
+
+  const getNavMenu = () => [{url: '', text: 'Logout', action: logoutHanlder}]
 
   return (
     <div className={styles.main}>
