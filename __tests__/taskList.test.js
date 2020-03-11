@@ -12,25 +12,27 @@ it('Should be rendered with no data', () => {
 it('Should be rendered the list', () => {
   const list = [
     {id: 1, value: 'Task 1', done: false},
-    {id: 2, value: 'Task 2', done: false}
+    {id: 2, value: 'Task 2', done: false},
   ]
   const {getByText} = render(<TaskList list={list} onUpdate={() => {}} />)
-  list.map((element) => {
+  list.map(element => {
     expect(getByText(element.value)).toBeInTheDocument()
   })
 })
 
-test('Should remove the second element of the list', async() => {
+test('Should remove the second element of the list', async () => {
   let testList = [
     {id: 1, value: 'Task 1', done: false},
-    {id: 2, value: 'Task 2', done: false}
+    {id: 2, value: 'Task 2', done: false},
   ]
   const listCopy = [...testList]
-  const updateList = (newList) => {
+  const updateList = newList => {
     testList = [...newList]
   }
 
-  const {getByText, getAllByTestId, rerender, queryByText} = render(<TaskList list={testList} onUpdate={updateList} />)
+  const {getByText, getAllByTestId, rerender, queryByText} = render(
+    <TaskList list={testList} onUpdate={updateList} />,
+  )
   const btnListRemove = getAllByTestId('btn-remove')
   userEvent.click(btnListRemove[1])
   rerender(<TaskList list={testList} onUpdate={updateList} />)
@@ -41,13 +43,15 @@ test('Should remove the second element of the list', async() => {
 test('Should update the second element', () => {
   let testList = [
     {id: 1, value: 'Task 1', done: false},
-    {id: 2, value: 'Task 2', done: false}
+    {id: 2, value: 'Task 2', done: false},
   ]
-  const updateHandler = (list) => {
+  const updateHandler = list => {
     testList = [...list]
   }
 
-  const {getByText, getAllByTestId, getByDisplayValue} = render(<TaskList list={testList} onUpdate={updateHandler} />)
+  const {getByText, getAllByTestId, getByDisplayValue} = render(
+    <TaskList list={testList} onUpdate={updateHandler} />,
+  )
   const allEditButtons = getAllByTestId('btn-edit')
   userEvent.click(allEditButtons[1])
 

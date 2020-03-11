@@ -9,30 +9,30 @@ test('Should be render', () => {
   const {getByPlaceholderText, getByText} = render(<EditTask />)
 
   expect(getByPlaceholderText(placeHolderText)).toBeInTheDocument()
-  expect(getByText('+')).toBeInTheDocument() 
+  expect(getByText('+')).toBeInTheDocument()
 })
 
-test('Should add new task after press enter' , () => {
-  const mockFunction = jest.fn();
+test('Should add new task after press enter', () => {
+  const mockFunction = jest.fn()
   const {getByPlaceholderText} = render(<EditTask onAddTask={mockFunction} />)
   const input = getByPlaceholderText(placeHolderText)
-  userEvent.type(input,'New Task')
+  userEvent.type(input, 'New Task')
   fireEvent.keyDown(input, {key: 'Enter', keyCode: 13})
   expect(mockFunction).toHaveBeenCalledTimes(1)
 })
 
-test('Should clear the input field after focus' , () => {
+test('Should clear the input field after focus', () => {
   const {getByPlaceholderText} = render(<EditTask />)
   const input = getByPlaceholderText(placeHolderText)
   input.focus()
   expect(input.value).toBe('')
 })
 
-test('Shouldn\'t clear the input field after focus' , () => {
+test("Shouldn't clear the input field after focus", () => {
   const task = {
-    id:1,
+    id: 1,
     value: 'Test',
-    done: false
+    done: false,
   }
   const {getByPlaceholderText} = render(<EditTask task={task} isEdit={true} />)
   const input = getByPlaceholderText('press enter to update task')
