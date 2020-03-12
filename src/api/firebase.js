@@ -1,7 +1,7 @@
 import * as firebase from 'firebase/app'
 import 'firebase/auth'
 
-const fireApp = firebase.initializeApp({
+const FireApp = firebase.initializeApp({
   apiKey: process.env.FIREBASE_KEY,
   authDomain: process.env.FIREBASE_DOMAIN,
   databaseURL: process.env.FIREBASE_DATABASE,
@@ -13,4 +13,4 @@ const fireApp = firebase.initializeApp({
 
 // fireApp.analytics()
 
-export default fireApp
+export default FireApp

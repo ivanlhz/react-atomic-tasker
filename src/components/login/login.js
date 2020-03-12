@@ -1,22 +1,24 @@
-import React, {useCallback, useContext} from 'react'
+import React, {useCallback, useContext, useState} from 'react'
 import PropTypes from 'prop-types'
 import styles from './login.module.scss'
 import {withRouter, Redirect} from 'react-router-dom'
 import {AuthContext} from '../../hooks/auth'
-import fireApp from '../../api/firebase'
+import FireApp from '../../api/firebase'
 
 const Login = ({history}) => {
+  const [error, setError] = useState(undefined)
   const handleLogin = useCallback(
     async event => {
       event.preventDefault()
       const {email, password} = event.target.elements
       try {
-        await fireApp
-          .auth()
-          .signInWithEmailAndPassword(email.value, password.value)
+        await FireApp.auth().signInWithEmailAndPassword(
+          email.value,
+          password.value,
+        )
         history.push('/tasker')
       } catch (error) {
-        alert(error)
+        setError(error)
       }
     },
     [history],
@@ -28,8 +30,8 @@ const Login = ({history}) => {
   }
 
   return (
-    <div className={styles.loginForm}>
-      <h2>Log in</h2>
+    <div data-testid='login-form' className={styles.loginForm}>
+      <h2>Welcome to Tasker!!</h2>
       <form onSubmit={handleLogin}>
         <label>
           Email
@@ -41,11 +43,13 @@ const Login = ({history}) => {
         </label>
         <button type='submit'>Log in</button>
       </form>
+      {error && <div className={styles.loginError}>{error}</div>}
     </div>
   )
 }
 Login.propTypes = {
   history: PropTypes.object,
+  loadFireApp: PropTypes.func,
 }
 
 export default withRouter(Login)
