@@ -18,7 +18,7 @@ const Login = ({history}) => {
         )
         history.push('/tasker')
       } catch (error) {
-        setError(error)
+        setError(error.message)
       }
     },
     [history],
@@ -49,7 +49,6 @@ const Login = ({history}) => {
 }
 Login.propTypes = {
   history: PropTypes.object,
-  loadFireApp: PropTypes.func,
 }
 
 export default withRouter(Login)
