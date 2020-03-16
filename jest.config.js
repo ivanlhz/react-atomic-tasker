@@ -3,8 +3,6 @@ module.exports = {
   moduleNameMapper: {
     '\\.css|scss$': require.resolve('./test/style_mock.js'),
   },
-  collectCoverageFrom: [
-    "src/**/{!(index),}.js"
-  ],
+  collectCoverageFrom: ['src/**/{!(index),}.js'],
   setupFilesAfterEnv: ['./jest.setup.js'],
 }
