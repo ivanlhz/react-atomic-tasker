@@ -1,84 +1,77 @@
 import React from 'react'
-import {render, wait} from '@testing-library/react'
+import {render, wait, cleanup} from '@testing-library/react'
 import {MemoryRouter} from 'react-router-dom'
 import {AuthContext} from '../src/hooks/auth'
 import userEvent from '@testing-library/user-event'
 import {Login} from '../src/components'
 import FireApp from '../src/api/firebase/'
-// import {Redirect as MockRedirect} from 'react-router'
 
-FireApp.auth = jest.fn().mockReturnValue({
-  signInWithEmailAndPassword: jest.fn(() => Promise.resolve(null)),
-})
+afterEach(cleanup)
 
-// jest.mock('react-router', () => {
-//   return {
-//     Redirect: jest.fn(() => null),
-//   }
-// })
-
-test('Should render the login', () => {
-  const {getByTestId} = render(
-    <MemoryRouter initialEntries={['/']}>
-      <AuthContext.Provider value={{currentUser: undefined}}>
-        <Login />
-      </AuthContext.Provider>
-    </MemoryRouter>,
-  )
-  expect(getByTestId('login-form')).toBeInTheDocument()
-})
-
-test('Should  call signInWithEmailAndPassword', () => {
-  const user = {
-    name: 'ivanlhz@gmail.com',
-    pwd: '1234',
-  }
-  FireApp.auth = jest.fn().mockReturnValue({
-    signInWithEmailAndPassword: jest.fn(() => Promise.resolve(null)),
+describe('Login page', () => {
+  test('Should render the login', () => {
+    const {getByTestId} = render(
+      <MemoryRouter initialEntries={['/']}>
+        <AuthContext.Provider value={{currentUser: undefined}}>
+          <Login />
+        </AuthContext.Provider>
+      </MemoryRouter>,
+    )
+    expect(getByTestId('login-form')).toBeInTheDocument()
   })
 
-  const {getByText, getByLabelText} = render(
-    <MemoryRouter initialEntries={['/']}>
-      <AuthContext.Provider value={{currentUser: undefined}}>
-        <Login />
-      </AuthContext.Provider>
-    </MemoryRouter>,
-  )
-  const submitBtn = getByText(/Log in/i)
-  const inputEmail = getByLabelText(/email/i)
-  const inputPwd = getByLabelText(/password/i)
-  userEvent.type(inputEmail, user.name)
-  userEvent.type(inputPwd, user.pwd)
-  userEvent.click(submitBtn)
-  expect(FireApp.auth().signInWithEmailAndPassword).toHaveBeenCalledTimes(1)
-})
+  test('Should  call signInWithEmailAndPassword', () => {
+    const user = {
+      name: 'ivanlhz@gmail.com',
+      pwd: '1234',
+    }
+    FireApp.auth = jest.fn().mockReturnValue({
+      signInWithEmailAndPassword: jest.fn(() => Promise.resolve(null)),
+    })
 
-test('Should reject the call signInWithEmailAndPassword and show the error message', () => {
-  const user = {
-    name: 'ivanlhz@gmail.com',
-    pwd: '1234',
-  }
-  FireApp.auth = jest.fn().mockReturnValue({
-    signInWithEmailAndPassword: jest.fn(() =>
-      Promise.reject({message: 'Login fail'}),
-    ),
+    const {getByText, getByLabelText} = render(
+      <MemoryRouter initialEntries={['/']}>
+        <AuthContext.Provider value={{currentUser: undefined}}>
+          <Login />
+        </AuthContext.Provider>
+      </MemoryRouter>,
+    )
+    const submitBtn = getByText(/Log in/i)
+    const inputEmail = getByLabelText(/email/i)
+    const inputPwd = getByLabelText(/password/i)
+    userEvent.type(inputEmail, user.name)
+    userEvent.type(inputPwd, user.pwd)
+    userEvent.click(submitBtn)
+    expect(FireApp.auth().signInWithEmailAndPassword).toHaveBeenCalledTimes(1)
   })
 
-  const {getByText, getByLabelText} = render(
-    <MemoryRouter initialEntries={['/']}>
-      <AuthContext.Provider value={{currentUser: undefined}}>
-        <Login />
-      </AuthContext.Provider>
-    </MemoryRouter>,
-  )
-  const submitBtn = getByText(/Log in/i)
-  const inputEmail = getByLabelText(/email/i)
-  const inputPwd = getByLabelText(/password/i)
-  userEvent.type(inputEmail, user.name)
-  userEvent.type(inputPwd, user.pwd)
-  userEvent.click(submitBtn)
-  expect(FireApp.auth().signInWithEmailAndPassword).toHaveBeenCalledTimes(1)
-  wait(() => {
-    expect(getByText(/Login fail/i)).toBeTruthy()
+  test('Should reject the call signInWithEmailAndPassword and show the error message', () => {
+    const user = {
+      name: 'ivanlhz@gmail.com',
+      pwd: '1234',
+    }
+    FireApp.auth = jest.fn().mockReturnValue({
+      signInWithEmailAndPassword: jest.fn(() =>
+        Promise.reject({message: 'Login fail'}),
+      ),
+    })
+
+    const {getByText, getByLabelText} = render(
+      <MemoryRouter initialEntries={['/']}>
+        <AuthContext.Provider value={{currentUser: undefined}}>
+          <Login />
+        </AuthContext.Provider>
+      </MemoryRouter>,
+    )
+    const submitBtn = getByText(/Log in/i)
+    const inputEmail = getByLabelText(/email/i)
+    const inputPwd = getByLabelText(/password/i)
+    userEvent.type(inputEmail, user.name)
+    userEvent.type(inputPwd, user.pwd)
+    userEvent.click(submitBtn)
+
+    wait(() => {
+      expect(getByText(/Login fail/i)).toBeTruthy()
+    })
   })
 })
